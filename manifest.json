@@ -1,0 +1,24 @@
+{
+  "name": "Bladder Timer",
+  "version": "1.0",
+  "description": "Help Retrain Your Bladder!",
+  "permissions": ["declarativeContent", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "bladder_icons/bladder_icon16.png",
+      "48": "bladder_icons/bladder_icon48.png",
+      "128": "bladder_icons/bladder_icon128.png"
+    }
+  },
+  "icons": {
+    "16": "bladder_icons/bladder_icon16.png",
+    "48": "bladder_icons/bladder_icon48.png",
+    "128": "bladder_icons/bladder_icon128.png"
+  },
+  "manifest_version": 2
+}
