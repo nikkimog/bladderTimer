@@ -1,0 +1,51 @@
+body {
+  color: #444054;
+  background-color: #f9f493;
+  width: 150px;
+}
+
+button {
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #444054;
+  color: #f9f493;
+  font-size: 12;
+  padding: 5px;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+button:hover {
+  color: #444054;
+  background-color: #f9f493;
+}
+
+/* start timer view */
+
+#howMuchTime {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+/* 
+#howMuchTime span {
+  margin-bottom: 7px;
+} */
+#timeForm {
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+#timeInput {
+  width: 40px;
+  margin-right: 5px;
+}
+
+/* countdown view  */

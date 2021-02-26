@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
+    <link rel="stylesheet" href="/popup.css" />
+    <!-- <style>
       button {
-        height: 30px;
-        width: 30px;
+        height: 40px;
+        width: 80px;
         outline: none;
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <button id="changeColor"></button>
+    <div id="howMuchTime">
+      <span>How much time until your next break?</span>
+      <form id="timeForm"><input id="timeInput" /> minutes</form>
+      <button id="startTimer">Start Bladder Timer</button>
+    </div>
+
+    <div id="timeRemaining">Time Remaining:</div>
+    <div id="urgeTechniques">
+      Have to go before time's up?
+      <a
+        href="http://pelvicfloorspecialist.com/urge-suppression-techniques-2/"
+        target="_blank"
+        >Try These Tips!</a
+      >
+    </div>
+    <button id="restartTimer">Restart Timer</button>
   </body>
+  <script src="background.js"></script>
 </html>
