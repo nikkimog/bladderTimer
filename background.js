@@ -26,7 +26,7 @@ function hide(section) {
 }
 
 function show(section) {
-  section.style.display = "block";
+  section.style.display = "flex";
 }
 
 // restart variable
@@ -52,7 +52,7 @@ restartTimer.addEventListener("click", function () {
   show(howMuchTime);
   hide(timeRemaining);
   clearInterval(myInterval);
-  timeRemaining.textContent = "";
+  timeRemaining.textContent = "Time Remaining:";
 });
 
 // timer functionality
