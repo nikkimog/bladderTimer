@@ -1,79 +1,39 @@
-let date = Date.now();
+let timeRemaining1 = document.getElementById("timeRemaining");
 
-chrome.runtime.onInstalled.addListener(function () {
-  console.log("installed");
-
-  chrome.browserAction.setPopup({ "time passed": date - Date.now() });
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  console.log("background.js got a message");
+  console.log(request);
+  console.log(sender);
+  if (request.cmd === "START_TIMER") {
+    // start(request.message, timeRemaining);
+    console.log("huh");
+    // let response = await start(request.message, timeRemaining);
+    // sendResponse(response);
+    // need to run start function in background.js, but get an error message
+    start(7, timeRemaining1)
+    start(request.message, timeRemaining1);
+    // sendResponse(request.message);
+  }
+  sendResponse(request);
 });
-
-// defining elements
-let urgeTechniques = document.getElementById("urgeTechniques");
-let restartTimer = document.getElementById("restartTimer");
-let startTimer = document.getElementById("startTimer");
-let howMuchTime = document.getElementById("howMuchTime");
-let timeForm = document.getElementById("timeForm");
-let timeInput = document.getElementById("timeInput");
-let timeRemaining = document.getElementById("timeRemaining");
-
-//starting hidden
-urgeTechniques.style.display = "none";
-restartTimer.style.display = "none";
-timeRemaining.style.display = "none";
-
-//functions hiding and showing
-function hide(section) {
-  section.style.display = "none";
-}
-
-function show(section) {
-  section.style.display = "flex";
-}
 
 // restart variable
-let myInterval = "";
-
-startTimer.addEventListener("click", function (e) {
-  console.log("clicked");
-  console.log(e.target);
-  hide(startTimer);
-  show(urgeTechniques);
-  show(restartTimer);
-  hide(howMuchTime);
-  show(timeRemaining);
-  start(timeInput.value, timeRemaining);
-  console.log("timeInput.value", timeInput.value);
-  timeInput.value = "";
-});
-
-restartTimer.addEventListener("click", function () {
-  hide(restartTimer);
-  hide(urgeTechniques);
-  show(startTimer);
-  show(howMuchTime);
-  hide(timeRemaining);
-  clearInterval(myInterval);
-  timeRemaining.textContent = "Time Remaining:";
-});
-
-// timer functionality
-timeForm.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    console.log("entered");
-    hide(startTimer);
-    show(urgeTechniques);
-    show(restartTimer);
-    hide(howMuchTime);
-    show(timeRemaining);
-
-    timerAmt = e.target.value;
-
-    start(e.target.value, timeRemaining);
-    timeInput.value = "";
-  }
-});
 
 function start(duration, display) {
+  timeLeft = duration;
+  console.log("ivestarted");
+  sendResponse({ status: true });
+
+  // if (beenStarted === true) {
+  //   // console.log("chrome.storage.local", chrome.storage.local);
+  //   chrome.storage.local.get(function (result) {
+  //     console.log(result);
+  //   });
+  //   console.log(chrome.storage.local.get("timeLeft"), function (result) {
+  //     console.log("value is currently" + result.timeLeft);
+  //   });
+  // }
+
   myInterval = setInterval(function () {
     console.log("duration", duration);
     minutes = Math.floor(duration);
@@ -84,9 +44,11 @@ function start(duration, display) {
 
     display.textContent = `Time Remaining: ${minutes}:${seconds}`;
     let oneSecond = 1.0 / 60.0;
-    console.log(oneSecond, "oneSecond");
     duration -= oneSecond;
-    console.log("duration after subtracting onesecond", duration);
+    beenStarted = true;
+    // console.log("chrome", chrome);
+    chrome.storage.local.set({ timeLeft: duration });
+
     if (duration <= 0) {
       display.textContent = "Time's up!";
       clearInterval(myInterval);
